@@ -3,6 +3,7 @@ package main
 import (
 	barkpush "bark_push/bark_push"
 	oncereminder "bark_push/once_reminder"
+	remindersender "bark_push/reminder_sender"
 	taskexecutor "bark_push/task_executor"
 	taskscheduler "bark_push/task_scheduler"
 	"fmt"
@@ -66,8 +67,10 @@ func setupAddTaskAPI(r *gin.Engine, scheduler *taskexecutor.TaskExecutor, barkPu
 		task.Icon = getDefaultIcon(task.Icon)
 		task.Group = getDefaultGroup(task.Group, "轮询")
 
+		reminderType, _ := remindersender.ParseReminder(task.Name)
+
 		err := scheduler.AddTask(task.Name, task.Schedule, func() {
-			if task.Name == "push: beimingyuyuyu" {
+			if reminderType == "push" {
 				barkPush.PushMessage(task.Title, task.Body, task.Icon, task.Group)
 			}
 		})

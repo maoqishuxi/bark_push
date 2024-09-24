@@ -1,11 +1,21 @@
 
-
+### 创建轮询任务
 POST http://localhost:8080/add-task
 Content-Type: application/json
 
 {
 	"name": "push: 北溟鱼发微博了",
-	"schedule": "*/1 * * * *"
+	"schedule": "*/5 * * * * *",
+	"title": "北溟鱼发微博了",
+	"body": "北溟鱼发微博了"	
+}
+
+### 删除任务
+DELETE http://localhost:8080/delete-task
+Content-Type: application/json
+
+{
+	"name": "push: 北溟鱼发微博了"
 }
 
 ### 创建一次性提醒
@@ -13,6 +23,18 @@ POST http://localhost:8080/once-reminder
 Content-Type: application/json
 
 {
-	"delay": 10,
-	"task": "push: 北溟鱼发微博了"
+	"time": "2024-09-24 16:23:00",
+	"icon": "",
+	"group": "",
+	"title": "测试",
+	"body": "测试"
 }   
+
+### 推送消息
+POST http://localhost:8080/push
+Content-Type: application/json
+
+{
+	"title": "标题",
+	"body": "内容"
+}
