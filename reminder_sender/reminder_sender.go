@@ -24,7 +24,7 @@ func (rs *ReminderSender) SendReminders() {
 	go func() {
 		for reminder := range rs.executor.GetQueue() {
 			var sendFunc func(string)
-			reminderType, message := parseReminder(reminder)
+			reminderType, message := ParseReminder(reminder)
 			switch reminderType {
 			case "push":
 				sendFunc = sendPushNotification
@@ -38,7 +38,7 @@ func (rs *ReminderSender) SendReminders() {
 }
 
 // parseReminder 解析提醒
-func parseReminder(reminder string) (string, string) {
+func ParseReminder(reminder string) (string, string) {
 	parts := strings.SplitN(reminder, ":", 2) // 只分割一次
 	if len(parts) != 2 {
 		fmt.Printf("Failed to parse reminder: %s, format error\n", reminder)

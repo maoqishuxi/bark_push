@@ -2,7 +2,6 @@ package taskscheduler
 
 import (
 	"sync"
-	"time"
 
 	"github.com/robfig/cron/v3"
 )
@@ -62,13 +61,4 @@ func (ts *TaskScheduler) RemoveTask(name string) {
 func (ts *TaskScheduler) UpdateTask(name string, spec string, cmd func()) error {
 	ts.RemoveTask(name)
 	return ts.AddTask(name, spec, cmd)
-}
-
-// AddOneTimeTask adds a task that will be executed only once at the specified time
-func (ts *TaskScheduler) AddOneTimeTask(taskTime time.Time, task func()) {
-	ts.cron.Schedule(cron.Schedule(cron.Every(taskTime.Sub(time.Now()))), cron.FuncJob(func() {
-		task()
-		// Remove the task after execution
-		ts.cron.Remove(cron.EntryID(ts.cron.Entries()[len(ts.cron.Entries())-1].ID))
-	}))
 }
