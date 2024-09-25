@@ -31,10 +31,31 @@ Content-Type: application/json
 }   
 
 ### 推送消息
-POST http://localhost:8080/push
+POST http://localhost:7000/push
 Content-Type: application/json
 
 {
-	"title": "标题",
-	"body": "内容"
+	"title": "test",
+	"body": "test"
+}
+
+### 推送消息
+POST http://bark.julai.fun:7000/push
+Content-Type: application/json
+
+{
+	"title": "test",
+	"body": "test"
+}
+
+### 创建一次性提醒
+POST http://bark.julai.fun:7000/once-reminder
+Content-Type: application/json
+
+{
+	"time": "2024-09-24 11:42:00",
+	"icon": "",
+	"group": "",
+	"title": "测试",
+	"body": "测试"
 }

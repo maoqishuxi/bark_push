@@ -27,7 +27,7 @@ func main() {
 	scheduler.Start()
 
 	// 启动 Gin 服务器
-	if err := r.Run(":8080"); err != nil {
+	if err := r.Run(":7000"); err != nil {
 		fmt.Printf("Failed to start server: %v\n", err)
 	}
 }
